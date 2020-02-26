@@ -11,5 +11,7 @@ config SOC_SERIES_SAMD21
 	select CPU_CORTEX_M_HAS_SYSTICK
 	select CPU_CORTEX_M_HAS_VTOR
 	select ASF
+	select HAS_SYS_POWER_STATE_SLEEP_1
+	select HAS_SYS_POWER_STATE_SLEEP_2
 	help
 	  Enable support for Atmel SAMD21 Cortex-M0+ microcontrollers.
