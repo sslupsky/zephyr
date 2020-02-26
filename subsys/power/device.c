@@ -31,6 +31,13 @@ static const char core_devices[][MAX_DEV_NAME_LEN] = {
 	"sys_clock",
 	"UART_0",
 };
+#elif defined(CONFIG_SOC_SERIES_SAMD21)
+#define MAX_PM_DEVICES   4
+#define NUM_CORE_DEVICES 1
+#define MAX_DEV_NAME_LEN 16
+static const char core_devices[NUM_CORE_DEVICES][MAX_DEV_NAME_LEN] = {
+	"SERCOM3",
+};
 #else
 #error "Add SoC's core devices list for PM"
 #endif
