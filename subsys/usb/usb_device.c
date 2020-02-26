@@ -1008,7 +1008,8 @@ static void forward_status_cb(enum usb_dc_status_code status, const u8_t *param)
 {
 	size_t size = (__usb_data_end - __usb_data_start);
 
-	if (status == USB_DC_DISCONNECTED || status == USB_DC_SUSPEND) {
+	if (status == USB_DC_DISCONNECTED || status == USB_DC_SUSPEND ||
+	    status == USB_DC_RESET) {
 		if (usb_dev.configured) {
 			usb_cancel_transfers();
 			if (status == USB_DC_DISCONNECTED) {
@@ -1092,6 +1093,7 @@ int usb_deconfig(void)
 	/* Reset USB controller */
 	usb_dc_reset();
 
+	LOG_DBG("Done");
 	return 0;
 }
 
@@ -1114,6 +1116,7 @@ int usb_disable(void)
 
 	usb_dev.enabled = false;
 
+	LOG_DBG("Done");
 	return 0;
 }
 
@@ -1309,6 +1312,7 @@ int usb_set_config(const u8_t *device_descriptor)
 	/* register class request handlers for each interface*/
 	usb_register_custom_req_handler(custom_handler);
 
+	LOG_DBG("Done");
 	return 0;
 }
 
@@ -1422,6 +1426,7 @@ static int usb_device_init(struct device *dev)
 	}
 
 	usb_set_config(device_descriptor);
+	LOG_DBG("Done");
 
 	return 0;
 }
